@@ -1,0 +1,23 @@
+// app.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const app = express();
+
+// Middlewares
+app.use(express.json());
+app.use(cors());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/inmobiliariaCRM', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Models
+const Property = require('./models/Property');
+
+// Routes
+app.use('/api/properties', require('./routes/properties'));
+
+// Start server
+app.listen(5000, () => {
+  console.log('Server running on port 5000');
+});
